@@ -14,7 +14,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="lam-3d-fps-godot-template"
+config/name="Lam 3D FPS Godot Template"
 run/main_scene="res://level/TitleScreen.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"

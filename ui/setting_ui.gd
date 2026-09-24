@@ -1,31 +1,31 @@
 extends Control
 class_name SettingUI
 
-@onready var tab_container: TabContainer = $TabContainer
+@onready var tab_container: TabContainer = %TabContainer
 
-@onready var mouse_sen_slider: HSlider = $TabContainer/Control/ScrollContainer/VBoxContainer/MouseSens/MouseSenSlider
-@onready var mouse_sen_value: Label = $TabContainer/Control/ScrollContainer/VBoxContainer/MouseSens/Value
-@onready var fov_slider: HSlider = $TabContainer/Graphic/VBoxContainer/FOV/FOVSlider
-@onready var fov_value: Label = $TabContainer/Graphic/VBoxContainer/FOV/Value
-@onready var camera_tilt_toggle: CheckButton = $TabContainer/Graphic/VBoxContainer/CameraTilt/CameraTiltToggle
-@onready var fps_limit_option_button: OptionButton = $TabContainer/Graphic/VBoxContainer/FPSLimit/FPSLimitOptionButton
-@onready var vsync_option_button: OptionButton = $TabContainer/Graphic/VBoxContainer/Vsync/VsyncOptionButton
-@onready var window_mode_option_button: OptionButton = $TabContainer/Graphic/VBoxContainer/WindowMode/WindowModeOptionButton
-@onready var resolution_option_button: OptionButton = $TabContainer/Graphic/VBoxContainer/Resolution/ResolutionOptionButton
-@onready var scaling_3d_slider: HSlider = $TabContainer/Graphic/VBoxContainer/Scaling3D/Scaling3DSlider
-@onready var scaling_3d_value: Label = $TabContainer/Graphic/VBoxContainer/Scaling3D/Value
+@onready var mouse_sen_slider: HSlider = %MouseSenSlider
+@onready var mouse_sen_value: Label = %MouseSensValue
+@onready var fov_slider: HSlider = %FOVSlider
+@onready var fov_value: Label = %FOVValue
+@onready var camera_tilt_toggle: CheckButton = %CameraTiltToggle
+@onready var fps_limit_option_button: OptionButton = %FPSLimitOptionButton
+@onready var vsync_option_button: OptionButton = %VsyncOptionButton
+@onready var window_mode_option_button: OptionButton = %WindowModeOptionButton
+@onready var resolution_option_button: OptionButton = %ResolutionOptionButton
+@onready var scaling_3d_slider: HSlider = %Scaling3DSlider
+@onready var scaling_3d_value: Label = %Scaling3DValue
 
-@onready var master_slider: HSlider = $TabContainer/Audio/VBoxContainer/Master/MasterSlider
-@onready var master_value: Label = $TabContainer/Audio/VBoxContainer/Master/Value
-@onready var bgm_slider: HSlider = $TabContainer/Audio/VBoxContainer/BGM/BGMSlider
-@onready var bgm_value: Label = $TabContainer/Audio/VBoxContainer/BGM/Value
-@onready var sfx_slider: HSlider = $TabContainer/Audio/VBoxContainer/SFX/SFXSlider
-@onready var sfx_value: Label = $TabContainer/Audio/VBoxContainer/SFX/Value
-@onready var ui_slider: HSlider = $TabContainer/Audio/VBoxContainer/UI/UISlider
-@onready var ui_value: Label = $TabContainer/Audio/VBoxContainer/UI/Value
+@onready var master_slider: HSlider = %MasterSlider
+@onready var master_value: Label = %MasterValue
+@onready var bgm_slider: HSlider = %BGMSlider
+@onready var bgm_value: Label = %BGMValue
+@onready var sfx_slider: HSlider = %SFXSlider
+@onready var sfx_value: Label = %SFXValue
+@onready var ui_slider: HSlider = %UISlider
+@onready var ui_value: Label = %UIValue
 
 @export var keybind_button_prefab: PackedScene
-@onready var keybind_container: Control = $TabContainer/Control/ScrollContainer/VBoxContainer/KeybindingSection
+@onready var keybind_container: Control = %KeybindingSection
 
 var pause_ui: PauseUI
 var keybindable_action_list = {
@@ -230,9 +230,6 @@ func _on_input_button_pressed(button: KeybindButton, action):
 
 func _on_reset_keybind_button_pressed():
 	create_keybind_buttons()
-
-func _on_reset_keybind_button_mouse_entered():
-	play_button_hover_sfx()
 
 
 func _on_tab_container_tab_clicked(_tab: int) -> void:
