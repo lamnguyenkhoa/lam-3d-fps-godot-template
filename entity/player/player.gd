@@ -36,6 +36,7 @@ const BULLET_SPAWN_POS_VARIATION = 10
 
 const DASH_SPEED_MODIFIER = 2
 const CROUCH_SPEED_MODIFIER = 0.5
+const SPRINT_SPEED_MODIFIER = 1.6
 
 var floor_col_pos = Vector3.ZERO
 var jumped = false
@@ -43,6 +44,7 @@ var can_coyote_jump = false
 var vel_horizontal = Vector2(0, 0)
 var vel_vertical = 0
 var is_dashing = false
+var is_sprinting = false
 var is_crouching:
 	set(value):
 		is_crouching = value
@@ -115,8 +117,11 @@ func _physics_process(delta):
 	else:
 		state_chart.send_event("airborne")
 
+	is_sprinting = Input.is_action_pressed("sprint") and not is_crouching and raw_input_dir != Vector2.ZERO
+	var max_speed = MAX_SPEED * SPRINT_SPEED_MODIFIER if is_sprinting else MAX_SPEED
+
 	var current_speed = vel_horizontal.length()
-	var add_speed = clamp(MAX_SPEED - current_speed, 0.0, ACCEL_RATE * delta)
+	var add_speed = clamp(max_speed - current_speed, 0.0, ACCEL_RATE * delta)
 
 	if is_dashing:
 		vel_horizontal = input_dir * MAX_SPEED
@@ -158,7 +163,7 @@ func show_debug_label():
 	debug_label.text += "\nHSpeed: {0} u/s\nVSpeed: {1} u/s".format([h_speed, v_speed])
 	debug_label.text += "\nHeight from ground: {0}".format([snapped_height - 1.5])
 	debug_label.text += "\nOn ground: {0} | wall-cling: {1}".format([is_on_floor(), moving_toward_wall()])
-	debug_label.text += "\nIs dashing: {0} | Is crouching: {1}".format([is_dashing, is_crouching])
+	debug_label.text += "\nIs dashing: {0} | Is crouching: {1} | Is sprinting: {2}".format([is_dashing, is_crouching, is_sprinting])
 	debug_label.text += "\nAir jumps left: {0}".format([max_air_jump - current_air_jump_count])
 	debug_label.text += "\nCoyote jump: {0}".format([can_coyote_jump])
 	debug_label.text += "\nUsing gun: {0}".format([gun_container.get_child(current_gun_slot).data.name])
